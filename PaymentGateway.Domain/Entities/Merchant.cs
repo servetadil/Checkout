@@ -1,17 +1,25 @@
-﻿using PaymentGateway.Domain.Common;
+﻿using Checkout.PaymentGateway.Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace PaymentGateway.Domain.Entities
+namespace Checkout.PaymentGateway.Domain.Entities
 {
     public class Merchant : Entity
     {
+        [Required]
         public string MerchantID { get; set; }
 
+        [Required]
         public string ApiKey { get; set; }
 
-        private Merchant(string merchantId, string apiKey)
+        public Merchant()
+        {
+
+        }
+
+        public Merchant(string merchantId, string apiKey)
         {
             SetMerchantID(merchantId);
             SetApiKey(apiKey);

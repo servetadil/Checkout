@@ -1,27 +1,28 @@
-﻿using PaymentGateway.Domain.Common;
+﻿using Checkout.PaymentGateway.Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace PaymentGateway.Domain.SharedKernel
+namespace Checkout.PaymentGateway.Domain.SharedKernel
 {
     public class Money : ValueObject<Money>
     {
+        [Required]
         public decimal Value { get; set; }
 
-        public Currency Currency { get; set; }
+        [Required]
+        public string Currency { get; set; }
+
+        public Money()
+        {
+        }
 
         public Money(decimal value, string currencyCode)
         {
             Value = value;
-            SetCurrency(currencyCode);
-        }
-
-        public void SetCurrency(string currencyCode)
-        {
-            if (currencyCode == null)
-                throw new ArgumentNullException(nameof(currencyCode));
-            Currency = new Currency(currencyCode);
+            Currency= currencyCode;
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using PaymentGateway.Helper.Common;
+﻿using Checkout.PaymentGateway.Helper.Common;
 using System.Collections.Generic;
 
-namespace PaymentGateway.Helper.Enums
+namespace Checkout.PaymentGateway.Helper.Enums
 {
     public class CardType : Enumeration
     {

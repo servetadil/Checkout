@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace PaymentGateway.Helper.Common
+namespace Checkout.PaymentGateway.Helper.Common
 {
     public abstract class Enumeration : IComparable
     {

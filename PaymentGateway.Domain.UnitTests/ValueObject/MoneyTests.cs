@@ -1,4 +1,4 @@
-using PaymentGateway.Domain.SharedKernel;
+using Checkout.PaymentGateway.Domain.SharedKernel;
 using System;
 using Xunit;
 using FluentAssertions;

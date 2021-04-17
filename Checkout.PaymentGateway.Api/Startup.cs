@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Checkout.PaymentGateway.Infrastructure;
+using Checkout.PaymentGateway.Infrastructure.Extensions;
+using Checkout.PaymentGateway.Application.Configuration;
 
 namespace Checkout.PaymentGateway.Api
 {
@@ -26,6 +29,12 @@ namespace Checkout.PaymentGateway.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddPersistence();
+
+
+
+            services.AddApplicationServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +55,9 @@ namespace Checkout.PaymentGateway.Api
             {
                 endpoints.MapControllers();
             });
+
+            // Feed Db
+            PrepareDatabaseExtensions.PrepareDatabase(app);
         }
     }
 }
