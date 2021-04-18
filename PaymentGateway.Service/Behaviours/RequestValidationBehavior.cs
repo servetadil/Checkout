@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
@@ -9,7 +10,7 @@ using MediatR;
 namespace Checkout.PaymentGateway.Application.Behaviours
 {
     public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
+         where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -30,7 +31,7 @@ namespace Checkout.PaymentGateway.Application.Behaviours
 
             if (failures.Count != 0)
             {
-                throw new Exception(failures.ToString());
+                throw new ValidationException(failures);
             }
 
             return next();

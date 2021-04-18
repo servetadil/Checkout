@@ -6,8 +6,8 @@ namespace Checkout.PaymentGateway.Application.Payments.Service
 {
     public class PaymentService : CrudService<Payment>, IPaymentService
     {
-        public PaymentService(IRepository<Payment> productRepository)
-        : base(productRepository)
+        public PaymentService(IRepository<Payment> paymentRepository)
+        : base(paymentRepository)
         {
         }
     }

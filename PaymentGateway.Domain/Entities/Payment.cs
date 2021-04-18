@@ -35,5 +35,18 @@ namespace Checkout.PaymentGateway.Domain.Entities
         {
 
         }
+
+        public Payment(
+            Guid paymentId, 
+            string orderId, 
+            decimal amount, 
+            string currency,
+            int paymentStatus)
+        {
+            PaymentID = paymentId;
+            OrderID = orderId;
+            Amount = new Money(amount, currency);
+            PaymentStatus = paymentStatus;
+        }
     }
 }

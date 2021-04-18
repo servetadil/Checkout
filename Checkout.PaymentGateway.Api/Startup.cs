@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Checkout.PaymentGateway.Infrastructure;
 using Checkout.PaymentGateway.Infrastructure.Extensions;
 using Checkout.PaymentGateway.Application.Configuration;
+using MediatR;
 
 namespace Checkout.PaymentGateway.Api
 {
@@ -30,11 +23,20 @@ namespace Checkout.PaymentGateway.Api
         {
             services.AddControllers();
 
+            // Adding MediatR
+            services.AddMediatR(typeof(Startup));
+
+            // Initialize Dbcontext
             services.AddPersistence();
 
-
-
+            // Initialize Application Services
             services.AddApplicationServices();
+
+            // Initialize Application Handlers
+            services.AddServiceHandlers();
+
+            // Initialize Automapper profiles
+            services.AddAutoMapperConfigurations();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
