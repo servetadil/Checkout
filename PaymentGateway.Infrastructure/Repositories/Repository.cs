@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Checkout.PaymentGateway.Infrastructure.Repositories
 {
@@ -53,6 +54,13 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
         public async Task<T> GetAsync(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
+
+            return entity;
+        }
+        
+        public async Task<T> SingleAsync(Expression<Func<T, bool>> wheres)
+        {
+            var entity = await _dbSet.SingleOrDefaultAsync(wheres);
 
             return entity;
         }

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Checkout.PaymentGateway.Api.Controllers
 {
-    [Route("api")]
     [ApiController]
     public class PaymentController : ApiController
     {
@@ -24,7 +23,7 @@ namespace Checkout.PaymentGateway.Api.Controllers
 
         [HttpPost]
         [Route("create-payment")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentCommand model)
         {
             var orderId = await _mediator.Send(model);

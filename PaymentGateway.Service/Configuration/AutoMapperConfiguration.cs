@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Checkout.PaymentGateway.Application.Mappers;
 
 namespace Checkout.PaymentGateway.Application.Configuration
 {
@@ -11,7 +9,7 @@ namespace Checkout.PaymentGateway.Application.Configuration
         {
             return new MapperConfiguration(config =>
             {
-                //config.AddProfile(new PaymentMapperProfile());
+                config.AddProfile(new MerchantsMapperProfile());
                 config.AllowNullCollections = true;
             })
             .CreateMapper();
