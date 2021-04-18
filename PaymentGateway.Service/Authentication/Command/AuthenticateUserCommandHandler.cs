@@ -1,4 +1,5 @@
 ﻿using Checkout.PaymentGateway.Application.Authentication.Service;
+using Checkout.PaymentGateway.Helper.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,10 @@ namespace Checkout.PaymentGateway.Application.Authentication.Command
         public async Task<string> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             var authenticationUser = await _merchantService.AuthenticateAndGenerateApiSecret(request.MerchantID, request.ApiKey);
+
+            if (authenticationUser == null)
+                throw new AuthenticationFailException(request.MerchantID, request.ApiKey);
+
 
             return authenticationUser.Secret;
         }

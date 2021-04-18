@@ -8,7 +8,10 @@ using Checkout.PaymentGateway.Application.Configuration;
 using MediatR;
 using Checkout.PaymentGateway.Api.Middleware;
 using Checkout.PaymentGateway.Api.Extensions;
-using Checkout.PaymentGateway.Api.Helpers;
+using Checkout.PaymentGateway.Helper.Common;
+using Microsoft.Extensions.Options;
+using Checkout.PaymentGateway.Helper.Configuration;
+using Checkout.PaymentGateway.Helper.Encryption;
 
 namespace Checkout.PaymentGateway.Api
 {
@@ -24,11 +27,15 @@ namespace Checkout.PaymentGateway.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddCors();
+            // configure strongly typed settings object
+            services
+                .Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"))
+                .AddSingleton(sp => sp.GetRequiredService<IOptions<ApplicationSettings>>().Value);
+
             services.AddControllers();
 
-            // configure strongly typed settings object
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            // Initialize Helper Services
+            services.AddHelperServices();
 
             // Initialize Dbcontext
             services.AddPersistence();
@@ -69,6 +76,9 @@ namespace Checkout.PaymentGateway.Api
 
             // custom jwt auth middleware
             app.UseMiddleware<JwtMiddleware>();
+
+            // error handling middleware
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

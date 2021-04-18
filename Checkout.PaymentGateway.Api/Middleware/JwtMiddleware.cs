@@ -1,5 +1,6 @@
-﻿using Checkout.PaymentGateway.Api.Helpers;
-using Checkout.PaymentGateway.Application.Authentication.Service;
+﻿using Checkout.PaymentGateway.Application.Authentication.Service;
+using Checkout.PaymentGateway.Helper.Common;
+using Checkout.PaymentGateway.Helper.Encryption;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,12 +15,17 @@ namespace Checkout.PaymentGateway.Api.Middleware
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly AppSettings _appSettings;
+        private readonly ApplicationSettings _appSettings;
+        private readonly IEncryptionService _encryptionService;
 
-        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
+        public JwtMiddleware(
+            RequestDelegate next,
+            ApplicationSettings appSettings,
+            IEncryptionService encryptionService)
         {
             _next = next;
-            _appSettings = appSettings.Value;
+            _appSettings = appSettings;
+            _encryptionService = encryptionService;
         }
 
         public async Task Invoke(HttpContext context, IMerchantService merchantService)
@@ -27,7 +33,7 @@ namespace Checkout.PaymentGateway.Api.Middleware
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                await InitializeUserToContext(context, merchantService, token);
+                await InitializeUserToContext(context, merchantService, _encryptionService.Decrypt(token));
 
             await _next(context);
         }
@@ -37,7 +43,7 @@ namespace Checkout.PaymentGateway.Api.Middleware
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes("TESTUSER KEY ASDFASDFASUSER KEY ASDFASDFASDFADFASDFASDFASDF");
+                var key = Encoding.ASCII.GetBytes(_appSettings.JwtKey);
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -57,8 +63,7 @@ namespace Checkout.PaymentGateway.Api.Middleware
             }
             catch
             {
-                // do nothing if jwt validation fails
-                // user is not attached to context so request won't have access to secure routes
+                throw new SecurityTokenExpiredException();
             }
         }
     }

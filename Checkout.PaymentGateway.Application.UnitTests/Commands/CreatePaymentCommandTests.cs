@@ -9,14 +9,14 @@ using Xunit;
 
 namespace Checkout.PaymentGateway.Application.UnitTests
 {
-    public class CreatePaymentCommandTest : CommandTestBase
+    public class CreatePaymentCommandTests : CommandTestBase
     {
         private readonly CreatePaymentCommandHandler _sut;
         private readonly CreatePaymentCommandValidator _sutValidator;
         private readonly Repository<Payment> _paymentRepository;
         private readonly PaymentService _paymentService;
 
-        public CreatePaymentCommandTest()
+        public CreatePaymentCommandTests()
         {
             _paymentRepository = new Repository<Payment>(_context);
             _paymentService = new PaymentService(_paymentRepository);
@@ -27,7 +27,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
 
         [Fact]
         public void Handle_GivenValidPaymentRequest_ShouldReturnPaymentId()
-        {
+        {            
             // Arrange
             var paymentCommand = new CreatePaymentCommand() { Amount = 12, Currency = "EUR", OrderID = "TEST" };
 

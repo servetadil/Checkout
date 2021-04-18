@@ -23,5 +23,9 @@
 	  <ProjectReference Include="..\PaymentGateway.Service\Checkout.PaymentGateway.Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Helpers\" />
+	</ItemGroup>
+
 
 </Project>

@@ -13,5 +13,7 @@ namespace Checkout.PaymentGateway.Application.Authentication.Service
         Task<AuthenticationUser> GetMerchant(string merchantId, string apiKey);
 
         Task<AuthenticationUser> AuthenticateAndGenerateApiSecret(string merchantId, string apiKey);
+
+        string GenerateJwtToken(string merchantId, string apiKey);
     }
 }
