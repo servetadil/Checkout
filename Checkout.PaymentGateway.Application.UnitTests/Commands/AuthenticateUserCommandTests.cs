@@ -16,6 +16,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
     public class AuthenticateUserCommandTests : CommandTestBase
     {
         private readonly AuthenticateUserCommandHandler _sut;
+        private readonly AuthenticateUserCommandValidatior _sutValidator;
         private readonly Repository<Merchant> _merchantRepository;
         private readonly MerchantService _merchantService;
 
@@ -30,6 +31,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
                 fixture.Mapper);
 
             _sut = new AuthenticateUserCommandHandler(_merchantService);
+            _sutValidator = new AuthenticateUserCommandValidatior();
         }
 
         [Fact]
@@ -50,7 +52,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
         }
 
         [Fact]
-        public async Task Handle_GivenWrongPaymentRequest_ShouldThrownAuthenticationFailException()
+        public async Task Handle_GivenWrongMerchant_ShouldThrownAuthenticationFailException()
         {
             // Arrange
             var authCommand = new AuthenticateUserCommand { MerchantID = "Test", ApiKey = "Test" };
@@ -62,5 +64,21 @@ namespace Checkout.PaymentGateway.Application.UnitTests
             await act.Should().ThrowAsync<AuthenticationFailException>();
         }
 
+        [Theory]
+        [InlineData("", "")]
+        [InlineData("TEST", "TESTApiKey")]
+        [InlineData("Min5CharData", "")]
+        [InlineData(null, null)]
+        public async Task Handle_GivenWrongMerchantDataModel_ShouldReturnValidationException(string merchantID, string apiKey)
+        {
+            // Arrange
+            var authCommand = new AuthenticateUserCommand { MerchantID = merchantID, ApiKey = apiKey };
+
+            // Act
+            var validationResult = await _sutValidator.ValidateAsync(authCommand);
+
+            // Assert
+            validationResult.Errors.Should().NotBeEmpty();
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
         public void Handle_GivenValidPaymentRequest_ShouldNotHaveValidationError()
         {
             // Arrange
-            var paymentCommand = new CreatePaymentCommand() { Amount = 12, Currency = "EUR", OrderID = "TEST" };
+            var paymentCommand = new CreatePaymentCommand() { Amount = 12, Currency = "EUR", OrderID = "TEST5" };
 
             // Act
             var validationResult = _sutValidator.Validate(paymentCommand);
@@ -56,6 +56,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
         [Theory]
         [InlineData(12, "EUR", "")]
         [InlineData(12, "EUR", null)]
+        [InlineData(10, "EUR", "TEST")]
         [InlineData(0, "EUR", "TESTORDERID")]
         [InlineData(10, "", "TESTORDERID")]
         [InlineData(10, null, "TESTORDERID")]

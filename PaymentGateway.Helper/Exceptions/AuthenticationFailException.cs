@@ -7,7 +7,7 @@ namespace Checkout.PaymentGateway.Helper.Exceptions
     public class AuthenticationFailException : Exception
     {
         public AuthenticationFailException(string merchantId, object apikey)
-             : base($"Merchant with  merchantID : \"{merchantId}\" and  ({apikey}) was not found.")
+             : base($"Merchant with  merchantID : {merchantId} and  security token ({apikey}) was not found.")
         {
         }
     }

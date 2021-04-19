@@ -1,6 +1,8 @@
 ﻿using Checkout.PaymentGateway.Helper.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -11,7 +13,10 @@ namespace Checkout.PaymentGateway.Api.Middleware
     {
         private readonly RequestDelegate _next;
 
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
+        public ErrorHandlingMiddleware(
+            RequestDelegate next)
         {
             _next = next;
         }
@@ -33,16 +38,29 @@ namespace Checkout.PaymentGateway.Api.Middleware
             var code = StatusCodes.Status500InternalServerError;
             var message = ex.Message;
 
-            if (ex is SecurityTokenExpiredException)
+            _logger.Error(ex.Message);
+             
+            switch (ex)
             {
-                code = StatusCodes.Status401Unauthorized;
-                message = ex.Message;
+                case SecurityTokenExpiredException _:
+                    code = StatusCodes.Status401Unauthorized;
+                    message = ex.Message;
+                    break;
+                case BadRequestException _:
+                    code = StatusCodes.Status400BadRequest;
+                    message = ex.Message;
+                    break;
+                case AuthenticationFailException _:
+                    code = StatusCodes.Status401Unauthorized;
+                    message = ex.Message;
+                    break;
             }
 
             var result = JsonConvert.SerializeObject(new { error = message });
             context.Response.Clear();
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = code;
+
             return context.Response.WriteAsync(result);
         }
     }

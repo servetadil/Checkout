@@ -3,6 +3,7 @@ using Checkout.PaymentGateway.Application.UnitTests.Common;
 using Checkout.PaymentGateway.Domain.Common;
 using Checkout.PaymentGateway.Domain.Entities;
 using Checkout.PaymentGateway.Helper.Encryption;
+using Checkout.PaymentGateway.Infrastructure.Repositories;
 using FluentAssertions;
 using Moq;
 using System;
@@ -12,26 +13,35 @@ using Xunit;
 
 namespace Checkout.PaymentGateway.Application.UnitTests.AuthTokenTests
 {
+    [Collection("QueryCollection")]
     public class EncrptionServiceTests : CommandTestBase
     {
         private readonly EncryptionService _sut;
-        private readonly MerchantService _sut2;
-        public EncrptionServiceTests()
+        private readonly Repository<Merchant> _merchantRepository;
+        private readonly MerchantService _merchantService;
+        public EncrptionServiceTests(QueryTestFixture fixture)
         {
             _sut = new Mock<EncryptionService>().Object;
-            _sut2 = new Mock<MerchantService>().Object;
+
+            _merchantService = new MerchantService(
+                _merchantRepository,
+                fixture.EncryptionService,
+                fixture.AppSettings,
+                fixture.Mapper);
         }
+
         [Fact]
-        public void Encrypt_GivenText_ShouldBeEncryptedGener()
+        public void Encrypt_GivenFakeMerchantDetails_ShouldBeConvertedToJWTToken()
         {
             // Arrange
-            var testString = "Test String";
+            var testMerchant = "merchantID";
+            var apiKey = "TestApiKey";
 
             // Act
-            var encryptedData = _sut2.GenerateJwtToken("test", "test");
+            var encryptedData = _merchantService.GenerateJwtToken(testMerchant, apiKey);
 
             // Assert
-            encryptedData.Should().NotBeEquivalentTo(testString);
+            encryptedData.Should().NotBeNullOrEmpty();
         }
 
         [Fact]

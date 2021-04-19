@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace Checkout.PaymentGateway.Api.Controllers
 {
@@ -6,6 +7,7 @@ namespace Checkout.PaymentGateway.Api.Controllers
     [ApiController]
     public abstract class ApiController : ControllerBase
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         protected ApiController()
         {
 

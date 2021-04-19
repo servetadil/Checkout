@@ -1,0 +1,5 @@
+2021-04-19 11:44:21.3004 Info Message Template Auto Format enabled
+2021-04-19 11:44:21.3655 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-19 11:44:21.4826 Info Adding target FileTarget(Name=alldata)
+2021-04-19 11:44:21.5513 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-19 11:44:21.6496 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
