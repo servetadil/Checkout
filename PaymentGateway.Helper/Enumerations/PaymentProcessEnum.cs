@@ -5,11 +5,11 @@ namespace Checkout.PaymentGateway.Helper.Enums
 {
     public class PaymentProcessEnum : Enumeration
     {
-        public static PaymentProcessEnum CreatePayment = new PaymentProcessEnum(1, "Debt Created");
-        public static PaymentProcessEnum RequestPayment = new PaymentProcessEnum(2, "Payment Requested");
-        public static PaymentProcessEnum RequestFuturePayment = new PaymentProcessEnum(3, "Future Payment Requested");
-        public static PaymentProcessEnum PaymentSucceeded = new PaymentProcessEnum(4, "Payment Succeeded");
-        public static PaymentProcessEnum PaymentFailed = new PaymentProcessEnum(5, "PaymentFailed");
+        public static PaymentProcessEnum CreatePayment = new PaymentProcessEnum(100, "Debt Created");
+        public static PaymentProcessEnum RequestPayment = new PaymentProcessEnum(203, "Payment Requested");
+        public static PaymentProcessEnum RequestFuturePayment = new PaymentProcessEnum(202, "Future Payment Requested");
+        public static PaymentProcessEnum PaymentSucceeded = new PaymentProcessEnum(201, "Payment Succeeded");
+        public static PaymentProcessEnum PaymentFailed = new PaymentProcessEnum(400, "Payment Failed");
 
         protected PaymentProcessEnum() { }
 

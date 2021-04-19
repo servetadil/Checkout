@@ -17,7 +17,12 @@ namespace Checkout.PaymentGateway.Domain.Entities
         public string OrderID { get; set; }
 
         [Required]
-        public Merchant Merchant { get; set; }
+        public string MerchantID { get; set; }
+
+        [Required]
+        public string ApiKey { get; set; }
+
+        public string BankTransactionID { get; set; }
 
         [Required]
         public Money Amount { get; set; }
@@ -26,7 +31,6 @@ namespace Checkout.PaymentGateway.Domain.Entities
 
         public DateTime PaymentDate { get; set; }
 
-        [Required]
         public bool IsFutureTransaction { get; set; }
 
         public int PaymentStatus { get; set; }
@@ -37,15 +41,19 @@ namespace Checkout.PaymentGateway.Domain.Entities
         }
 
         public Payment(
-            Guid paymentId, 
-            string orderId, 
-            decimal amount, 
+            Guid paymentId,
+            string orderId,
+            decimal amount,
             string currency,
+            string merchantId,
+            string apiKey,
             int paymentStatus)
         {
             PaymentID = paymentId;
             OrderID = orderId;
             Amount = new Money(amount, currency);
+            MerchantID = merchantId;
+            ApiKey = apiKey;
             PaymentStatus = paymentStatus;
         }
     }

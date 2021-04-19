@@ -5,7 +5,6 @@ using Checkout.PaymentGateway.Domain.Common;
 using Checkout.PaymentGateway.Domain.Entities;
 using Checkout.PaymentGateway.Helper.Common;
 using Checkout.PaymentGateway.Helper.Encryption;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -23,6 +22,7 @@ namespace Checkout.PaymentGateway.Application.Authentication.Service
 
         private readonly IEncryptionService _encryptionService;
 
+
         public MerchantService(
             IRepository<Merchant> merchantRepository,
             IEncryptionService encryptionService,
@@ -33,6 +33,7 @@ namespace Checkout.PaymentGateway.Application.Authentication.Service
             _appSettings = appSettings;
             _mapper = mapper;
             _encryptionService = encryptionService;
+
         }
 
         public async Task<AuthenticationUser> GetMerchant(string merchantId, string apiKey)

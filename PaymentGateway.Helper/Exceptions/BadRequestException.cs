@@ -6,8 +6,8 @@ namespace Checkout.PaymentGateway.Helper.Exceptions
 {
     public class BadRequestException : Exception
     {
-        public BadRequestException()
-             : base($"Bad Request")
+        public BadRequestException(string name, object message)
+             : base($"Bad request on  {name} with error :  ({message}) ")
         {
         }
     }

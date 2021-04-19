@@ -21,8 +21,11 @@ namespace Checkout.PaymentGateway.Domain.SharedKernel
 
         public Money(decimal value, string currencyCode)
         {
+            if (value <= 0 || currencyCode == null)
+                throw new ArgumentNullException("Cannot create  0 Amount or without currencyCode");
+
             Value = value;
-            Currency= currencyCode;
+            Currency = currencyCode;
         }
     }
 }

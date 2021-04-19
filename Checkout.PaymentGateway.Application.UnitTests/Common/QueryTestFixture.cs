@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Checkout.PaymentGateway.Application.Common;
 using Checkout.PaymentGateway.Application.Mappers;
 using Checkout.PaymentGateway.Helper.Common;
 using Checkout.PaymentGateway.Helper.Encryption;
+using Moq;
 using System;
 using Xunit;
 

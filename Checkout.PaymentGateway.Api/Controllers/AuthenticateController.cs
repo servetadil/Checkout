@@ -11,14 +11,10 @@ namespace Checkout.PaymentGateway.Api.Controllers
     public class AuthenticateController : ApiController
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<AuthenticateController> _logger;
 
-        public AuthenticateController(
-            IMediator mediator,
-            ILogger<AuthenticateController> logger)
+        public AuthenticateController(IMediator mediator)
         {
             _mediator = mediator;
-            _logger = logger;
         }
 
         [HttpPost]

@@ -10,7 +10,7 @@ namespace Checkout.PaymentGateway.Helper.Encryption
     {
         private TripleDESCryptoServiceProvider m_des = new TripleDESCryptoServiceProvider();
 
-        private string keyValue = "_SviddNeger_Application_";
+        private string keyValue = "_St@s!N@g@r_Application_";
         private string keyIV = "_ulver43135sviddne__ger_";
 
         private byte[] m_key;

@@ -17,7 +17,8 @@ namespace Checkout.PaymentGateway.Application.Common.Services
 
         public async Task<int> Create(T entity)
         {
-            var adding = entity.Id.Equals(default);
+            entity.CreatedDateTime = DateTime.Now;
+            entity.LastUpdatedDateTime = DateTime.Now;
 
             await _repository.CreateAsync(entity);
 
@@ -27,6 +28,7 @@ namespace Checkout.PaymentGateway.Application.Common.Services
 
         public async Task<int> Update(T entity)
         {
+            entity.LastUpdatedDateTime = DateTime.Now;
             await _repository.UpdateAsync(entity);
 
             await _repository.SaveChangesAsync();

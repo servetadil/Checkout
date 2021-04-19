@@ -23,7 +23,7 @@ namespace Checkout.PaymentGateway.Infrastructure.Configurations
             builder.Property(e => e.OrderID)
                 .HasColumnName("OrderID").IsRequired().HasMaxLength(36);
 
-             builder.OwnsOne(x => x.Amount, b =>
+            builder.OwnsOne(x => x.Amount, b =>
             {
                 b.Property(x => x.Value)
                     .HasColumnName("Amount")
@@ -50,17 +50,23 @@ namespace Checkout.PaymentGateway.Infrastructure.Configurations
                     .HasColumnName("ExpiryYear");
             });
 
-            builder.Property<DateTime>(e => e.PaymentDate)
+            builder.Property<DateTime>(x => x.PaymentDate)
                 .HasColumnName("PaymentDate");
 
-            builder.Property(e => e.IsFutureTransaction)
+            builder.Property(x => x.IsFutureTransaction)
                     .HasColumnName("IsFutureTransaction")
                      .HasColumnType("bit");
 
-            builder.Property(e => e.PaymentStatus)
+            builder.Property(x => x.PaymentStatus)
                     .HasColumnName("PaymentStatus")
                     .HasColumnType("int")
                     .IsRequired();
+
+            builder.Property(x => x.MerchantID)
+                .HasColumnName("MerchantID");
+
+            builder.Property(x => x.ApiKey)
+                .HasColumnName("ApiKey");
         }
     }
 }

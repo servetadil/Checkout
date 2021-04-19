@@ -5,13 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Checkout.PaymentGateway.Infrastructure.Extensions;
 using Checkout.PaymentGateway.Application.Configuration;
-using MediatR;
 using Checkout.PaymentGateway.Api.Middleware;
 using Checkout.PaymentGateway.Api.Extensions;
 using Checkout.PaymentGateway.Helper.Common;
 using Microsoft.Extensions.Options;
 using Checkout.PaymentGateway.Helper.Configuration;
-using Checkout.PaymentGateway.Helper.Encryption;
+using Bank.PaymentProcessor.PaymentProcessor;
+using System;
 
 namespace Checkout.PaymentGateway.Api
 {
@@ -32,7 +32,9 @@ namespace Checkout.PaymentGateway.Api
                 .Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"))
                 .AddSingleton(sp => sp.GetRequiredService<IOptions<ApplicationSettings>>().Value);
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
+
+            services.AddHttpContextAccessor();
 
             // Initialize Helper Services
             services.AddHelperServices();
@@ -48,6 +50,12 @@ namespace Checkout.PaymentGateway.Api
 
             // Initialize Automapper profiles
             services.AddAutoMapperConfigurations();
+
+
+            services.AddHttpClient<IPaymentProcessor, PaymentProcessor>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:44306");
+            });
 
             // Initialize Swagger
             services.AddSwagger();

@@ -7,7 +7,7 @@ namespace Checkout.PaymentGateway.Helper.Configuration
     {
         public static IServiceCollection AddHelperServices(this IServiceCollection services)
         {
-            services.AddTransient<IEncryptionService, EncryptionService>();
+            services.AddSingleton<IEncryptionService, EncryptionService>();
             return services;
         }
     }

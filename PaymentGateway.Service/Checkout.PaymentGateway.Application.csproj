@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bank.PaymentProcessor\Bank.PaymentProcessor.csproj" />
     <ProjectReference Include="..\PaymentGateway.Domain\Checkout.PaymentGateway.Domain.csproj" />
     <ProjectReference Include="..\PaymentGateway.Helper\Checkout.PaymentGateway.Helper.csproj" />
   </ItemGroup>
@@ -19,6 +20,7 @@
     <PackageReference Include="FluentValidation" Version="8.5.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.10.2" />

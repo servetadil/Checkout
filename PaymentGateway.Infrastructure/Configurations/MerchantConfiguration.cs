@@ -18,7 +18,7 @@ namespace Checkout.PaymentGateway.Infrastructure.Configurations
                 .ValueGeneratedOnAdd();
 
             builder.Property(e => e.MerchantID)
-                .HasColumnName("MerchantID").IsRequired().HasMaxLength(30);
+                .HasColumnName("MerchantID").IsRequired();
 
             builder.Property(e => e.ApiKey)
                 .HasColumnName("ApiKey").IsRequired();
