@@ -12,7 +12,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
 
         public string CardNumber { get; set; }
 
-        public int CvvCode { get; set; }
+        public string CvvCode { get; set; }
 
         public int ExpiryMonth { get; set; }
 
