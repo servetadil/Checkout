@@ -6,6 +6,8 @@ using Xunit;
 using FluentAssertions;
 using System;
 using System.Net.Http;
+using Checkout.PaymentGateway.Application.Payments.Queries.GetPaymentList;
+using System.Linq;
 
 namespace Checkout.PaymentGateway.Api.IntegrationTests
 {
@@ -36,6 +38,25 @@ namespace Checkout.PaymentGateway.Api.IntegrationTests
             payment.Should().NotBeNull();
             payment.OrderID.Should().NotBeNull();
         }
+
+        [Fact]
+        public async Task GetPaymentQueryList_GivenCorrectMerchant_ShouldReturnPayments()
+        {
+            // Arrange 
+            var client = await _factory.GetAuthenticatedClientAsync(TestMerchantID, TestApiKey);
+            var generatedPaymentOrderID = await GeneratePayment(client);
+
+            // Act
+            var submittedResponse = await client.GetAsync($"/api/get-payments");
+            var payment = await Utils.GetResponseContent<GetPaymentListVm>(submittedResponse);
+
+            // Assert
+            var payments = payment.PaymentList;
+            payments.Should().NotBeNull();
+            payments.Count().Should().BeGreaterThan(1);
+            payments.Where(x => x.PaymentID == generatedPaymentOrderID).Should().NotBeNull();
+        }
+
 
         public async Task<Guid> GeneratePayment(HttpClient client)
         {
