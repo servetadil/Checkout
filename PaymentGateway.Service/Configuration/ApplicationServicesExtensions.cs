@@ -1,11 +1,11 @@
-﻿using Bank.PaymentProcessor.PaymentProcessor;
-using Checkout.PaymentGateway.Application.Authentication.Command;
+﻿using Checkout.PaymentGateway.Application.Authentication.Command;
 using Checkout.PaymentGateway.Application.Authentication.Service;
 using Checkout.PaymentGateway.Application.Authentication.User;
 using Checkout.PaymentGateway.Application.Behaviours;
 using Checkout.PaymentGateway.Application.Common;
 using Checkout.PaymentGateway.Application.Common.Services;
 using Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment;
+using Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePayment;
 using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
 using Checkout.PaymentGateway.Application.Payments.Service;
 using MediatR;
@@ -34,6 +34,7 @@ namespace Checkout.PaymentGateway.Application.Configuration
             services.AddScoped<IRequestHandler<CreatePaymentCommand, CreatePaymentResultWm>, CreatePaymentCommandHandler>();
             services.AddScoped<IRequestHandler<AuthenticateUserCommand, AuthenticationUser>, AuthenticateUserCommandHandler>();
             services.AddScoped<IRequestHandler<SubmitPaymentCommand, SubmitPaymentResultWm>, SubmitPaymentCommandHandler>();
+            services.AddScoped<IRequestHandler<SubmitFuturePaymentCommand, SubmitFuturePaymentResultWm>, SubmitFuturePaymentCommandHandler>();
             return services;
         }
 

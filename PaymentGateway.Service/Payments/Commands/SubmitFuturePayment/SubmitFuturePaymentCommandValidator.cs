@@ -1,11 +1,13 @@
-﻿using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
-using FluentValidation;
+﻿using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
+namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePayment
 {
-    public class SubmitPaymentCommandValidator : AbstractValidator<SubmitPaymentCommand>
+    public class SubmitFuturePaymentCommandValidator : AbstractValidator<SubmitFuturePaymentCommand>
     {
-        public SubmitPaymentCommandValidator()
+        public SubmitFuturePaymentCommandValidator()
         {
             RuleFor(x => x.CardName).MinimumLength(5).NotEmpty().NotNull();
 

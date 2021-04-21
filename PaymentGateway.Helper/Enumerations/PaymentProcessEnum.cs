@@ -10,7 +10,7 @@ namespace Checkout.PaymentGateway.Helper.Enums
         public static PaymentProcessEnum RequestFuturePayment = new PaymentProcessEnum(202, "Future Payment Requested");
         public static PaymentProcessEnum PaymentSucceeded = new PaymentProcessEnum(201, "Payment Succeeded");
         public static PaymentProcessEnum PaymentFailed = new PaymentProcessEnum(400, "Payment Failed");
-
+        public static PaymentProcessEnum RequestFuturePaymentFail = new PaymentProcessEnum(204, "Future Payment Request failed");
         protected PaymentProcessEnum() { }
 
         public PaymentProcessEnum(int id, string name)

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment;
+using Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePayment;
 using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Checkout.PaymentGateway.Api.Controllers
 {
@@ -41,6 +41,21 @@ namespace Checkout.PaymentGateway.Api.Controllers
         [Route("submit-payment")]
         [Produces("application/json")]
         public async Task<IActionResult> SubmitPayment([FromBody] SubmitPaymentCommand model)
+        {
+            var result = await _mediator.Send(model);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Submit payment for future transaction. This method will not return bank response directly.
+        /// </summary>
+        /// 
+        [Authorize]
+        [HttpPost]
+        [Route("submit-future-payment")]
+        [Produces("application/json")]
+        public async Task<IActionResult> SubmitFuturePayment([FromBody] SubmitFuturePaymentCommand model)
         {
             var result = await _mediator.Send(model);
 

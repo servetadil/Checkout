@@ -1,36 +1,36 @@
-using Checkout.PaymentGateway.Api.IntegrationTests.Common;
+﻿using Checkout.PaymentGateway.Api.IntegrationTests.Common;
+using Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment;
+using Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePayment;
+using Checkout.PaymentGateway.Helper.Enums;
+using FluentAssertions;
+using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
-using FluentAssertions;
-using System.Net;
-using Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment;
-using System;
-using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
-using Checkout.PaymentGateway.Helper.Enums;
-using System.Net.Http;
 
-namespace Checkout.PaymentGateway.Api.IntegrationTests
+namespace Checkout.PaymentGateway.Api.IntegrationTests.Controllers
 {
-    public class SubmitPaymentControllerTests : IClassFixture<CheckoutWebApiApplicationFactory<Startup>>
+    public class SubmitFuturePaymentControllerTests : IClassFixture<CheckoutWebApiApplicationFactory<Startup>>
     {
         private const string TestApiKey = "314179fa-7de9-4c9d-8d52-fb6f62ab3815";
         private const string TestMerchantID = "HB123H7123G712";
 
         private readonly CheckoutWebApiApplicationFactory<Startup> _factory;
 
-        public SubmitPaymentControllerTests(CheckoutWebApiApplicationFactory<Startup> factory)
+        public SubmitFuturePaymentControllerTests(CheckoutWebApiApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
 
         [Fact]
-        public async Task SubmitPayment_GivenCorrectPaymentInfo_ShouldReturnSuccess()
+        public async Task SubmitFuturePayment_GivenCorrectPaymentInfo_ShouldReturnSuccess()
         {
             // Arrange 
             var client = await _factory.GetAuthenticatedClientAsync(TestMerchantID, TestApiKey);
             var generatedPaymentOrderID = await GeneratePayment(client);
 
-            var submitCommand = new SubmitPaymentCommand()
+            var submitCommand = new SubmitFuturePaymentCommand()
             {
                 CardName = "Test CardName",
                 CvvCode = "545",
@@ -41,15 +41,12 @@ namespace Checkout.PaymentGateway.Api.IntegrationTests
             };
 
             // Act
-            var submittedResponse = await client.PostAsync($"/api/submit-payment", Utils.GetRequestContent(submitCommand));
-            var payment = await Utils.GetResponseContent<SubmitPaymentResultWm>(submittedResponse);
+            var submittedResponse = await client.PostAsync($"/api/submit-future-payment", Utils.GetRequestContent(submitCommand));
+            var payment = await Utils.GetResponseContent<SubmitFuturePaymentResultWm>(submittedResponse);
 
             // Assert
             payment.OrderID.Should().NotBeNullOrEmpty();
-            payment.ResponseCode.Should().BeOneOf(
-                PaymentProcessEnum.RequestFuturePayment.Id,
-                PaymentProcessEnum.PaymentFailed.Id,
-                PaymentProcessEnum.PaymentSucceeded.Id);
+            payment.ResponseCode.Should().Be(PaymentProcessEnum.RequestFuturePayment.Id);
             submittedResponse.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
@@ -63,7 +60,7 @@ namespace Checkout.PaymentGateway.Api.IntegrationTests
             var client = await _factory.GetAuthenticatedClientAsync(TestMerchantID, TestApiKey);
             var generatedPaymentOrderID = await GeneratePayment(client);
 
-            var submitCommand = new SubmitPaymentCommand()
+            var submitCommand = new SubmitFuturePaymentCommand()
             {
                 CardName = "Test CardName",
                 CvvCode = "545",
@@ -74,7 +71,7 @@ namespace Checkout.PaymentGateway.Api.IntegrationTests
             };
 
             // Act
-            var submittedResponse = await client.PostAsync($"/api/submit-payment", Utils.GetRequestContent(submitCommand));
+            var submittedResponse = await client.PostAsync($"/api/submit-future-payment", Utils.GetRequestContent(submitCommand));
 
             // Assert
             submittedResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -97,4 +94,3 @@ namespace Checkout.PaymentGateway.Api.IntegrationTests
 
     }
 }
-

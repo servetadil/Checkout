@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
+namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePayment
 {
-    public class SubmitPaymentResultWm
+    public class SubmitFuturePaymentResultWm
     {
         public int ResponseCode { get; set; }
 
