@@ -88,7 +88,7 @@ namespace Checkout.PaymentGateway.Api.Controllers
         [HttpGet]
         [Route("get-payment/{paymentID}")]
         [Produces("application/json")]
-        public async Task<ActionResult<GetPaymentListVm>> GetPayments(Guid paymentID)
+        public async Task<ActionResult<GetPaymentDetailVm>> GetPayments(Guid paymentID)
         {
             var result = await _mediator.Send(new GetPaymentDetailQuery() { PaymentID=paymentID });
 
