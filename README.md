@@ -2,19 +2,18 @@
 
 ## Project Information
 
-This assessment contains 2 main part: 
+This assessment contains 2 main parts: 
 - Payment Gateway System
-  Allows Merchants to create payment, submit payment and get payments list.
-- Mock Fake Bank Payment Processor 
-  Fake Bank Payment Processor is simulating credit card payment to the bank.
+  Allow Merchants to create payments, submit payments and get payments list.
+- Mocked Bank Payment Processor 
+  The moked Bank Payment Processor is simulating credit card payment to the bank.
 
 
 ## Future Improvments
 
-- Repositories & Services could be seperated (read/write repo and service) for the purpose of seperation Databases and read/write from different Databases.
-- Queries could read from Db like nosql, and we can keep Sql for write our data.
-- It would nice to have Quee for future-payment api method to trigger payment for non-realtime use.
-- It would nice to have some constants instead of hard coded error messages.
+- Repositories & Services could be separated (read/write repo and service) so that these are also connected to different Databases. For ınstance, queries could read from Db like nosql, and we can keep Sql to write our data.
+- A queue or background processing jobs for future-payment api method to trigger payment for non-realtime use could be useful.
+- Constants could be used instead of hard coded error messages.
 
 
 ## Project Architecture : 
