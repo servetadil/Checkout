@@ -1,5 +1,4 @@
-﻿using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
 {

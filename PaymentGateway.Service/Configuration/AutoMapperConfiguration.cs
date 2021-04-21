@@ -10,6 +10,7 @@ namespace Checkout.PaymentGateway.Application.Configuration
             return new MapperConfiguration(config =>
             {
                 config.AddProfile(new MerchantsMapperProfile());
+                config.AddProfile(new PaymentsMapperProfile());
                 config.AllowNullCollections = true;
             })
             .CreateMapper();

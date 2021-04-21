@@ -16,16 +16,13 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePaym
     {
         private readonly IPaymentService _paymentService;
         private readonly IEncryptionService _encryptionService;
-        private readonly IAuthorizationService _authService;
 
         public SubmitFuturePaymentCommandHandler(
             IPaymentService paymentService,
-            IEncryptionService encryptionService,
-            IAuthorizationService authService)
+            IEncryptionService encryptionService)
         {
             _paymentService = paymentService;
             _encryptionService = encryptionService;
-            _authService = authService;
         }
 
         public async Task<SubmitFuturePaymentResultWm> Handle(SubmitFuturePaymentCommand request, CancellationToken cancellationToken)
@@ -36,7 +33,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePaym
             {
                 await SaveRequestPreQuee(payment, request);
 
-                // */*/*Optional TODO
+                // */*/* Optional TODO */*/*/*/*
                 // 
                 // Future Payment Command Is optional. ( For merchants who wants to process their membership etc. payments )
                 // Here we can create new quee etc. and proccess future payments.
@@ -62,9 +59,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePaym
 
         private async Task<Payment> ValidateAndGetGeneratedPayment(SubmitFuturePaymentCommand request)
         {
-            var authenticatedUser = _authService.GetAuthenticatedMerchant();
-
-            var payment = await _paymentService.GetPaymentByPaymentID(request.PaymentID, authenticatedUser.MerchantID, authenticatedUser.ApiKey);
+            var payment = await _paymentService.GetPaymentByPaymentID(request.PaymentID);
 
             if (payment == null)
                 throw new NotFoundException(nameof(Merchant), request.PaymentID.ToString());
@@ -84,7 +79,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePaym
                 ExpiryYear = _encryptionService.Encrypt(request.ExpiryYear.ToString())
             };
 
-            payment.LastUpdatedDateTime = DateTime.Now;
+            payment.PaymentDate = DateTime.Now;
             payment.IsFutureTransaction = true;
             await _paymentService.Update(payment);
 

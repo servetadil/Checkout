@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment;
 using Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePayment;
 using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
+using Checkout.PaymentGateway.Application.Payments.Queries.GetPaymenDetail;
+using Checkout.PaymentGateway.Application.Payments.Queries.GetPaymentList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,6 +61,36 @@ namespace Checkout.PaymentGateway.Api.Controllers
         public async Task<IActionResult> SubmitFuturePayment([FromBody] SubmitFuturePaymentCommand model)
         {
             var result = await _mediator.Send(model);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get Payment List. This method will only return authorized merchant's payments.
+        /// </summary>
+        /// 
+        [Authorize]
+        [HttpGet]
+        [Route("get-payments")]
+        [Produces("application/json")]
+        public async Task<ActionResult<GetPaymentListVm>> GetPayments()
+        {
+            var result = await _mediator.Send(new GetPaymentListQuery());
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get Payment by PaymentID. This method will only return authorized merchant's payment detail.
+        /// </summary>
+        /// 
+        [Authorize]
+        [HttpGet]
+        [Route("get-payment/{paymentID}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<GetPaymentListVm>> GetPayments(Guid paymentID)
+        {
+            var result = await _mediator.Send(new GetPaymentDetailQuery() { PaymentID=paymentID });
 
             return Ok(result);
         }

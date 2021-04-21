@@ -1,6 +1,7 @@
 ﻿using Checkout.PaymentGateway.Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Checkout.PaymentGateway.Application.Common.Services
@@ -35,9 +36,9 @@ namespace Checkout.PaymentGateway.Application.Common.Services
             return entity.Id;
         }
 
-        public async Task<IEnumerable<T>> Get()
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> wheres)
         {
-            return await _repository.GetAllAsync();
+            return await _repository.GetAllAsync(wheres);
         }
 
         public virtual async Task<T> GetById(Guid Id)

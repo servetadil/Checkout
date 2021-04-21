@@ -17,7 +17,7 @@ namespace Checkout.PaymentGateway.Domain.Common
 
         Task UpdateAsync(T entity);
 
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> wheres);
 
         IQueryable<T> GetQueryable();
 

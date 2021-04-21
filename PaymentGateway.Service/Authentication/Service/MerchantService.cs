@@ -17,9 +17,7 @@ namespace Checkout.PaymentGateway.Application.Authentication.Service
     public class MerchantService : CrudService<Merchant>, IMerchantService
     {
         private readonly IMapper _mapper;
-
         private readonly ApplicationSettings _appSettings;
-
         private readonly IEncryptionService _encryptionService;
 
 
@@ -33,7 +31,6 @@ namespace Checkout.PaymentGateway.Application.Authentication.Service
             _appSettings = appSettings;
             _mapper = mapper;
             _encryptionService = encryptionService;
-
         }
 
         public async Task<AuthenticationUser> GetMerchant(string merchantId, string apiKey)

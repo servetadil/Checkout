@@ -41,9 +41,9 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
             await DeleteAsync(entity);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> wheres)
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.Where(wheres).ToListAsync();
         }
 
         public IQueryable<T> GetQueryable()

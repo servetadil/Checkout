@@ -7,6 +7,8 @@ using Checkout.PaymentGateway.Application.Common.Services;
 using Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment;
 using Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePayment;
 using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
+using Checkout.PaymentGateway.Application.Payments.Queries.GetPaymenDetail;
+using Checkout.PaymentGateway.Application.Payments.Queries.GetPaymentList;
 using Checkout.PaymentGateway.Application.Payments.Service;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +37,8 @@ namespace Checkout.PaymentGateway.Application.Configuration
             services.AddScoped<IRequestHandler<AuthenticateUserCommand, AuthenticationUser>, AuthenticateUserCommandHandler>();
             services.AddScoped<IRequestHandler<SubmitPaymentCommand, SubmitPaymentResultWm>, SubmitPaymentCommandHandler>();
             services.AddScoped<IRequestHandler<SubmitFuturePaymentCommand, SubmitFuturePaymentResultWm>, SubmitFuturePaymentCommandHandler>();
+            services.AddScoped<IRequestHandler<GetPaymentDetailQuery, GetPaymentDetailVm>, GetPaymentDetailQuery.GetPaymentDetailQueryHandler>();
+            services.AddScoped<IRequestHandler<GetPaymentListQuery, GetPaymentListVm>, GetPaymentListQuery.GetPaymentListQueryHandler>();
             return services;
         }
 

@@ -1,7 +1,5 @@
 ﻿using Bank.PaymentProcessor.Model;
 using Bank.PaymentProcessor.PaymentProcessor;
-using Checkout.PaymentGateway.Application.Common;
-using Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment;
 using Checkout.PaymentGateway.Application.Payments.Service;
 using Checkout.PaymentGateway.Domain.Entities;
 using Checkout.PaymentGateway.Domain.SharedKernel;
@@ -19,18 +17,15 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
     {
         private readonly IPaymentService _paymentService;
         private readonly IEncryptionService _encryptionService;
-        private readonly IAuthorizationService _authService;
         private readonly IPaymentProcessor _mockBankClient;
 
         public SubmitPaymentCommandHandler(
             IPaymentService paymentService,
             IEncryptionService encryptionService,
-            IAuthorizationService authService,
             IPaymentProcessor mockBankClient)
         {
             _paymentService = paymentService;
             _encryptionService = encryptionService;
-            _authService = authService;
             _mockBankClient = mockBankClient;
 
         }
@@ -74,9 +69,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
 
         private async Task<Payment> ValidateAndGetGeneratedPayment(SubmitPaymentCommand request)
         {
-            var authenticatedUser = _authService.GetAuthenticatedMerchant();
-
-            var payment = await _paymentService.GetPaymentByPaymentID(request.PaymentID, authenticatedUser.MerchantID, authenticatedUser.ApiKey);
+            var payment = await _paymentService.GetPaymentByPaymentID(request.PaymentID);
 
             if (payment == null)
                 throw new NotFoundException(nameof(Merchant), request.PaymentID.ToString());
@@ -96,7 +89,6 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
                 ExpiryYear = _encryptionService.Encrypt(request.ExpiryYear.ToString())
             };
 
-            payment.LastUpdatedDateTime = DateTime.Now;
             payment.IsFutureTransaction = false;
             await _paymentService.Update(payment);
 
@@ -116,6 +108,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
                 payment.PaymentStatus = PaymentProcessEnum.PaymentFailed.Id;
             }
 
+            payment.PaymentDate = DateTime.Now;
             await _paymentService.Update(payment);
 
             return payment;
