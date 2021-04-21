@@ -1,4 +1,5 @@
 ﻿using Checkout.PaymentGateway.Application.Authentication.Service;
+using Checkout.PaymentGateway.Application.Authentication.User;
 using Checkout.PaymentGateway.Helper.Exceptions;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.PaymentGateway.Application.Authentication.Command
 {
-    public class AuthenticateUserCommandHandler : IRequestHandler<AuthenticateUserCommand, string>
+    public class AuthenticateUserCommandHandler : IRequestHandler<AuthenticateUserCommand, AuthenticationUser>
     {
         private readonly IMerchantService _merchantService;
 
@@ -18,7 +19,7 @@ namespace Checkout.PaymentGateway.Application.Authentication.Command
             _merchantService = merchantService;
         }
 
-        public async Task<string> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
+        public async Task<AuthenticationUser> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             var authenticationUser = await _merchantService.AuthenticateAndGenerateApiSecret(request.MerchantID, request.ApiKey);
 
@@ -26,7 +27,7 @@ namespace Checkout.PaymentGateway.Application.Authentication.Command
                 throw new AuthenticationFailException(request.MerchantID, request.ApiKey);
 
 
-            return authenticationUser.Secret;
+            return authenticationUser;
         }
     }
 }

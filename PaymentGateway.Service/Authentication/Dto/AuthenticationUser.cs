@@ -8,9 +8,9 @@ namespace Checkout.PaymentGateway.Application.Authentication.User
     public class AuthenticationUser
     {
         public string MerchantID { get; set; }
+
         public string ApiKey { get; set; }
 
-        [JsonIgnore]
         public string Secret { get; set; }
     }
 }

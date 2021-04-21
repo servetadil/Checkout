@@ -1,6 +1,7 @@
 ﻿using Bank.PaymentProcessor.PaymentProcessor;
 using Checkout.PaymentGateway.Application.Authentication.Command;
 using Checkout.PaymentGateway.Application.Authentication.Service;
+using Checkout.PaymentGateway.Application.Authentication.User;
 using Checkout.PaymentGateway.Application.Behaviours;
 using Checkout.PaymentGateway.Application.Common;
 using Checkout.PaymentGateway.Application.Common.Services;
@@ -9,7 +10,6 @@ using Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment;
 using Checkout.PaymentGateway.Application.Payments.Service;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Reflection;
 
 namespace Checkout.PaymentGateway.Application.Configuration
@@ -31,8 +31,8 @@ namespace Checkout.PaymentGateway.Application.Configuration
 
         public static IServiceCollection AddServiceHandlers(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandler<CreatePaymentCommand, Guid>, CreatePaymentCommandHandler>();
-            services.AddScoped<IRequestHandler<AuthenticateUserCommand, string>, AuthenticateUserCommandHandler>();
+            services.AddScoped<IRequestHandler<CreatePaymentCommand, CreatePaymentResultWm>, CreatePaymentCommandHandler>();
+            services.AddScoped<IRequestHandler<AuthenticateUserCommand, AuthenticationUser>, AuthenticateUserCommandHandler>();
             services.AddScoped<IRequestHandler<SubmitPaymentCommand, SubmitPaymentResultWm>, SubmitPaymentCommandHandler>();
             return services;
         }

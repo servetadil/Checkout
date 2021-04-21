@@ -12,6 +12,8 @@ using Microsoft.Extensions.Options;
 using Checkout.PaymentGateway.Helper.Configuration;
 using Bank.PaymentProcessor.PaymentProcessor;
 using System;
+using FluentValidation.AspNetCore;
+using Checkout.PaymentGateway.Application.Authentication.Command;
 
 namespace Checkout.PaymentGateway.Api
 {
@@ -32,7 +34,8 @@ namespace Checkout.PaymentGateway.Api
                 .Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"))
                 .AddSingleton(sp => sp.GetRequiredService<IOptions<ApplicationSettings>>().Value);
 
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AuthenticateUserCommandValidator>());
 
             services.AddHttpContextAccessor();
 
@@ -50,7 +53,6 @@ namespace Checkout.PaymentGateway.Api
 
             // Initialize Automapper profiles
             services.AddAutoMapperConfigurations();
-
 
             services.AddHttpClient<IPaymentProcessor, PaymentProcessor>(client =>
             {

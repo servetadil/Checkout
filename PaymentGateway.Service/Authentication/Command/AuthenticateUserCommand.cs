@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Checkout.PaymentGateway.Application.Authentication.User;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Text;
 namespace Checkout.PaymentGateway.Application.Authentication.Command
 {
 
-    public class AuthenticateUserCommand : IRequest<string>
+    public class AuthenticateUserCommand : IRequest<AuthenticationUser>
     {
         public string MerchantID { get; set; }
 

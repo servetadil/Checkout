@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment
 {
-    public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand, Guid>
+    public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand, CreatePaymentResultWm>
     {
         private readonly IPaymentService _paymentService;
         private readonly IAuthorizationService _authService;
 
         public CreatePaymentCommandHandler(
-            
+
             IPaymentService paymentService,
             IAuthorizationService authService)
         {
@@ -23,7 +23,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment
             _authService = authService;
         }
 
-        public async Task<Guid> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
+        public async Task<CreatePaymentResultWm> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
         {
             var paymentId = Guid.NewGuid();
             var commandUser = _authService.GetAuthenticatedMerchant();
@@ -39,7 +39,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment
 
             await _paymentService.Create(payment);
 
-            return paymentId;
+            return new CreatePaymentResultWm { OrderID = paymentId };
         }
     }
 }

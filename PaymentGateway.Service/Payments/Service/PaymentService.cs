@@ -11,14 +11,13 @@ namespace Checkout.PaymentGateway.Application.Payments.Service
         public PaymentService(IRepository<Payment> paymentRepository)
         : base(paymentRepository)
         {
-
         }
 
         public async Task<Payment> GetPaymentByPaymentID(Guid paymentId, string merchantId, string apiKey)
         {
             var entity = await _repository.SingleAsync(
-                x => x.PaymentID == paymentId && 
-                x.MerchantID == merchantId && 
+                x => x.PaymentID == paymentId &&
+                x.MerchantID == merchantId &&
                 x.ApiKey == apiKey);
 
             return entity;

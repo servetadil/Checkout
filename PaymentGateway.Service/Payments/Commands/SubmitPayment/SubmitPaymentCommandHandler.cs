@@ -37,27 +37,11 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
 
         public async Task<SubmitPaymentResultWm> Handle(SubmitPaymentCommand request, CancellationToken cancellationToken)
         {
-            var authenticatedUser = _authService.GetAuthenticatedMerchant();
-
-            var payment = await _paymentService.GetPaymentByPaymentID(request.PaymentID, authenticatedUser.MerchantID, authenticatedUser.ApiKey);
-
-            if (payment == null)
-                throw new NotFoundException(nameof(Merchant), request.PaymentID.ToString());
+            var payment = await ValidateAndGetGeneratedPayment(request);
 
             try
             {
-                payment.PaymentStatus = PaymentProcessEnum.RequestPayment.Id;
-                payment.Card = new CreditCard()
-                {
-                    CardName = _encryptionService.Encrypt(request.CardName),
-                    CardNumber = _encryptionService.Encrypt(request.CardNumber),
-                    CvvCode = _encryptionService.Encrypt(request.CvvCode.ToString()),
-                    ExpiryMonth = _encryptionService.Encrypt(request.ExpiryMonth.ToString()),
-                    ExpiryYear = _encryptionService.Encrypt(request.ExpiryYear.ToString())
-                };
-
-                payment.LastUpdatedDateTime = DateTime.Now;
-                payment.IsFutureTransaction = false;
+                await SaveRequestPrePostingToBank(payment, request);
 
                 var bankResponse = await _mockBankClient.CreatePaymentTransactionAsync(
                     new Uri("https://localhost:44306"),
@@ -71,19 +55,13 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
                         PaymentTrackID = payment.OrderID
                     });
 
-                if (bankResponse.StatusCode == BankTransactionResponseStatusEnum.PaymentSucceeded.Id)
-                {
-                    payment.PaymentStatus = PaymentProcessEnum.RequestPayment.Id;
-                }
-
-                await _paymentService.Update(payment);
+                await SaveBankResponse(payment, bankResponse);
 
                 return new SubmitPaymentResultWm()
                 {
                     OrderID = payment.OrderID,
                     ResponseCode = PaymentProcessEnum.PaymentSucceeded.Id,
                     ResponseMessage = PaymentProcessEnum.PaymentSucceeded.Name
-
                 };
             }
             catch (Exception ex)
@@ -92,6 +70,55 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
                 await _paymentService.Update(payment);
                 throw new BadRequestException(nameof(SubmitPaymentCommandHandler), "Payment failed");
             }
+        }
+
+        private async Task<Payment> ValidateAndGetGeneratedPayment(SubmitPaymentCommand request)
+        {
+            var authenticatedUser = _authService.GetAuthenticatedMerchant();
+
+            var payment = await _paymentService.GetPaymentByPaymentID(request.PaymentID, authenticatedUser.MerchantID, authenticatedUser.ApiKey);
+
+            if (payment == null)
+                throw new NotFoundException(nameof(Merchant), request.PaymentID.ToString());
+
+            return payment;
+        }
+
+        private async Task<Payment> SaveRequestPrePostingToBank(Payment payment, SubmitPaymentCommand request)
+        {
+            payment.PaymentStatus = PaymentProcessEnum.RequestPayment.Id;
+            payment.Card = new CreditCard()
+            {
+                CardName = _encryptionService.Encrypt(request.CardName),
+                CardNumber = _encryptionService.Encrypt(request.CardNumber),
+                CvvCode = _encryptionService.Encrypt(request.CvvCode.ToString()),
+                ExpiryMonth = _encryptionService.Encrypt(request.ExpiryMonth.ToString()),
+                ExpiryYear = _encryptionService.Encrypt(request.ExpiryYear.ToString())
+            };
+
+            payment.LastUpdatedDateTime = DateTime.Now;
+            payment.IsFutureTransaction = false;
+            await _paymentService.Update(payment);
+
+            return payment;
+        }
+
+        private async Task<Payment> SaveBankResponse(Payment payment, TransactionResponse bankResponse)
+        {
+            payment.BankTransactionID = bankResponse.TransactionID;
+
+            if (bankResponse.StatusCode == BankTransactionResponseStatusEnum.PaymentSucceeded.Id)
+            {
+                payment.PaymentStatus = PaymentProcessEnum.PaymentSucceeded.Id;
+            }
+            if (bankResponse.StatusCode == BankTransactionResponseStatusEnum.PaymentFailed.Id)
+            {
+                payment.PaymentStatus = PaymentProcessEnum.PaymentFailed.Id;
+            }
+
+            await _paymentService.Update(payment);
+
+            return payment;
         }
     }
 }

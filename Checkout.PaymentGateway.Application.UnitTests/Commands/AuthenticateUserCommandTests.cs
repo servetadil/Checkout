@@ -16,7 +16,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
     public class AuthenticateUserCommandTests : CommandTestBase
     {
         private readonly AuthenticateUserCommandHandler _sut;
-        private readonly AuthenticateUserCommandValidatior _sutValidator;
+        private readonly AuthenticateUserCommandValidator _sutValidator;
         private readonly Repository<Merchant> _merchantRepository;
         private readonly MerchantService _merchantService;
 
@@ -31,7 +31,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
                 fixture.Mapper);
 
             _sut = new AuthenticateUserCommandHandler(_merchantService);
-            _sutValidator = new AuthenticateUserCommandValidatior();
+            _sutValidator = new AuthenticateUserCommandValidator();
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace Checkout.PaymentGateway.Application.UnitTests
             var result = await _sut.Handle(authCommand, CancellationToken.None);
 
             // Assert
-            result.Should().NotBeEmpty();
+            result.Should().NotBeNull();
         }
 
         [Fact]

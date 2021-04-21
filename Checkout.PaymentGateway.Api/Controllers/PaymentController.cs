@@ -20,22 +20,25 @@ namespace Checkout.PaymentGateway.Api.Controllers
         /// <summary>
         /// Create empty payments for merchants
         /// </summary>
+        /// 
+        [Authorize]
         [HttpPost]
         [Route("create-payment")]
-        [Authorize]
+        [Produces("application/json")]
         public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentCommand model)
         {
             var orderId = await _mediator.Send(model);
 
-            return Ok(new { OrderId = orderId });
+            return Ok(orderId);
         }
 
         /// <summary>
         /// Submit and send to the Bank for process payment
         /// </summary>
+        /// 
+        [Authorize]
         [HttpPost]
         [Route("submit-payment")]
-        [Authorize]
         [Produces("application/json")]
         public async Task<IActionResult> SubmitPayment([FromBody] SubmitPaymentCommand model)
         {

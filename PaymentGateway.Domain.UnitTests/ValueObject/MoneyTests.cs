@@ -15,10 +15,10 @@ namespace PaymentGateway.Domain.UnitTests
         }
 
         [Fact]
-        public void SetCurrency_GivenZeroAmount_ShouldNotThrown()
+        public void SetCurrency_GivenZeroAmount_ShouldThrown()
         {
             Action action = () => new Money(0, "EUR");
-            action.Should().NotThrow();
+            action.Should().Throw<ArgumentNullException>();
         }
     }
 }

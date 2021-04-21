@@ -3,7 +3,6 @@ using Checkout.PaymentGateway.Application.Authentication.Command;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Checkout.PaymentGateway.Api.Controllers
 {
@@ -17,14 +16,19 @@ namespace Checkout.PaymentGateway.Api.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        ///  Authenticate with MerchantID and ApiKey
+        /// </summary>
+        /// 
+        [AllowAnonymous]
         [HttpPost]
         [Route("authenticate")]
-        [AllowAnonymous]
-        public async Task<IActionResult> CreatePayment([FromBody] AuthenticateUserCommand model)
+        [Produces("application/json")]
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticateUserCommand model)
         {
-            var token = await _mediator.Send(model);
+            var authUser = await _mediator.Send(model);
 
-            return Ok(new { Token = token });
+            return Ok(authUser);
         }
     }
 }

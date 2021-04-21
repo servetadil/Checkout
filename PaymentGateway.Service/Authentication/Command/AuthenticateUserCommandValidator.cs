@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Checkout.PaymentGateway.Application.Authentication.Command
 {
-    public class AuthenticateUserCommandValidatior : AbstractValidator<AuthenticateUserCommand>
+    public class AuthenticateUserCommandValidator : AbstractValidator<AuthenticateUserCommand>
     {
-        public AuthenticateUserCommandValidatior()
+        public AuthenticateUserCommandValidator()
         {
             RuleFor(x => x.MerchantID)
                 .MinimumLength(5)

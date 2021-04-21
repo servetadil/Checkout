@@ -3,7 +3,7 @@ using System;
 
 namespace Checkout.PaymentGateway.Application.Payments.Commands.CreatePayment
 {
-    public class CreatePaymentCommand : IRequest<Guid>
+    public class CreatePaymentCommand : IRequest<CreatePaymentResultWm>
     {
         public string OrderID { get; set; }
 
