@@ -38,7 +38,7 @@ namespace Checkout.PaymentGateway.Api.Middleware
             var code = StatusCodes.Status500InternalServerError;
             var message = ex.Message;
 
-            _logger.Error(ex.Message);
+            _logger.Error(ex.ToString());
              
             switch (ex)
             {

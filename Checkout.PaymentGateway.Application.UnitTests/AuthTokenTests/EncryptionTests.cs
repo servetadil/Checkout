@@ -6,9 +6,6 @@ using Checkout.PaymentGateway.Helper.Encryption;
 using Checkout.PaymentGateway.Infrastructure.Repositories;
 using FluentAssertions;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Checkout.PaymentGateway.Application.UnitTests.AuthTokenTests

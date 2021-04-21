@@ -57,7 +57,7 @@ namespace Bank.PaymentProcessor.PaymentProcessor
                     StatusCode = returnCode
                 };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new TransactionResponse()
                 {

@@ -45,6 +45,11 @@ namespace Checkout.PaymentGateway.Helper.Common
             }
         }
 
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
         public override bool Equals(object obj)
         {
             var otherValue = obj as Enumeration;

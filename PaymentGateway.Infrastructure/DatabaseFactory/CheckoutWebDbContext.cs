@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Checkout.PaymentGateway.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Checkout.PaymentGateway.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Checkout.PaymentGateway.Infrastructure.DatabaseFactory
 {

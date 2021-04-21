@@ -1,5 +1,4 @@
-﻿using Checkout.PaymentGateway.Application.Common;
-using Checkout.PaymentGateway.Application.Payments.Service;
+﻿using Checkout.PaymentGateway.Application.Payments.Service;
 using Checkout.PaymentGateway.Domain.Entities;
 using Checkout.PaymentGateway.Domain.SharedKernel;
 using Checkout.PaymentGateway.Helper.Encryption;
@@ -49,7 +48,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitFuturePaym
                     ResponseMessage = PaymentProcessEnum.RequestFuturePayment.Name
                 };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 payment.PaymentStatus = PaymentProcessEnum.RequestFuturePaymentFail.Id;
                 await _paymentService.Update(payment);

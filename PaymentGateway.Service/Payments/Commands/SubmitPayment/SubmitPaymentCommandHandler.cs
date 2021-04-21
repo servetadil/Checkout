@@ -59,7 +59,7 @@ namespace Checkout.PaymentGateway.Application.Payments.Commands.SubmitPayment
                     ResponseMessage = PaymentProcessEnum.PaymentSucceeded.Name
                 };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 payment.PaymentStatus = PaymentProcessEnum.PaymentFailed.Id;
                 await _paymentService.Update(payment);

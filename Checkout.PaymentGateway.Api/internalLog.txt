@@ -281,3 +281,13 @@
 2021-04-21 19:17:50.1506 Info Adding target FileTarget(Name=alldata)
 2021-04-21 19:17:50.1622 Info Adding target FileTarget(Name=otherFile-web)
 2021-04-21 19:17:50.2089 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-21 20:36:27.1627 Info Message Template Auto Format enabled
+2021-04-21 20:36:27.1806 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 20:36:27.2488 Info Adding target FileTarget(Name=alldata)
+2021-04-21 20:36:27.2488 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 20:36:27.3013 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-21 20:37:45.2836 Info Message Template Auto Format enabled
+2021-04-21 20:37:45.3033 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 20:37:45.3785 Info Adding target FileTarget(Name=alldata)
+2021-04-21 20:37:45.3905 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 20:37:45.4422 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
