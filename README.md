@@ -11,19 +11,18 @@ This assessment contains 2 main parts:
 
 ## Future Improvments
 
-- There is no such a cache mechanism for GetPayments & PaymentDetails. It would be nice to have MemoryCache, Distributed Cache etc.
+- There is no cache mechanism for GetPayments & PaymentDetails methods. It would be nice to have MemoryCache, Distributed Cache etc.
 - Repositories & Services could be separated (read/write repo and service) so that these are also connected to different Databases. 
-- For instance, queries could read from Db like nosql, and we can keep Sql to write our data.
+For instance, queries could read from Db like nosql, and we can keep Sql to write our data.
 - A queue or background processing jobs for future-payment api method to trigger payment for non-realtime use could be useful.
 - Constants could be used instead of hard coded error messages.
 
 ## Installation
 
-Project and database has been developed with Entity Framework Code first approach therefore once you run the project, 
-It will automatically create Database & test api users.
+Project and database have been developed with Entity Framework Code first approach, therefore, once you run the project, it will automatically create the Database & test api users.
 
 ### Install project via Docker : 
-If you prefer to run project from Linux container on Docker, run this code on root directory folder of docker-compose : 
+If you prefer to run project from Linux container on Docker, run this code on the root directory folder of docker-compose file : 
 
 ```
 docker-compose up
@@ -32,9 +31,9 @@ Sql instance will be up from port number : 1433
 
 
 ### Install project via Visual Studio IIS Express : 
-If you prefer to run project via Visual Studio without any Docker containers : 
+If you prefer to run the project via Visual Studio without any Docker containers : 
 
-First you should set your Sql connection string in
+First, you should set your Sql connection string in
 Checkout.PaymentGateway.Api project appsettings.json : 
 
 ```
@@ -49,13 +48,13 @@ Checkout.PaymentGateway.Api project appsettings.json :
 ![Untitled Diagram](https://user-images.githubusercontent.com/34062320/115704698-fad4a480-a36b-11eb-9d36-dbbb6b44aecc.png)
 
 
-For improve readbility Swagger UI has been integrated to project. All request could have been done through Swagger UI ( api/index.html )
+To improve readbility Swagger UI has been integrated to project. All request could have been done through Swagger UI ( api/index.html )
 
 #### Important Notes : It's not possible to reach any api methods without authorization
-For being authorize ; 
-- First you should make a request to /api/authentication endpoint with your merchantID and apiKey.
-- If your merchantID and apiKey correct,  api will return encyrpted "secret" key.
-- For all other api calls you should put this "Secret" key on "Authorization" header.
+To be authorized ; 
+- First you should make a request to the /api/authentication endpoint with your merchantID and apiKey.
+- If your merchantID and apiKey are correct, api will return an encyrpted "secret" key.
+- For all other api calls you should put this "Secret" key on the "Authorization" header.
 
 Test Users : 
   ```
