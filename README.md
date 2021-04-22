@@ -11,6 +11,7 @@ This assessment contains 2 main parts:
 
 ## Future Improvments
 
+- There is no such a cache mechanism for GetPayments & PaymentDetails. It would be nice to have MemoryCache, Distributed Cache etc.
 - Repositories & Services could be separated (read/write repo and service) so that these are also connected to different Databases. 
 - For instance, queries could read from Db like nosql, and we can keep Sql to write our data.
 - A queue or background processing jobs for future-payment api method to trigger payment for non-realtime use could be useful.
