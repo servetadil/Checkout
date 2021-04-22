@@ -47,7 +47,7 @@ Checkout.PaymentGateway.Api project appsettings.json :
 
 ## API Structure : 
 
-![Untitled Diagram](https://user-images.githubusercontent.com/34062320/115704698-fad4a480-a36b-11eb-9d36-dbbb6b44aecc.png)
+![Untitled Diagram](https://user-images.githubusercontent.com/34062320/115713554-6e7baf00-a376-11eb-85b7-7684919fced8.png)
 
 
 To improve readbility Swagger UI has been integrated to project. All request could have been done through Swagger UI ( api/index.html )
