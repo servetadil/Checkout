@@ -11,9 +11,70 @@ This assessment contains 2 main parts:
 
 ## Future Improvments
 
-- Repositories & Services could be separated (read/write repo and service) so that these are also connected to different Databases. For ınstance, queries could read from Db like nosql, and we can keep Sql to write our data.
+- Repositories & Services could be separated (read/write repo and service) so that these are also connected to different Databases. 
+- For instance, queries could read from Db like nosql, and we can keep Sql to write our data.
 - A queue or background processing jobs for future-payment api method to trigger payment for non-realtime use could be useful.
 - Constants could be used instead of hard coded error messages.
+
+## Installation
+
+Project and database has been developed with Entity Framework Code first approach therefore once you run the project, 
+It will automatically create Database & test api users.
+
+### Install project via Docker : 
+If you prefer to run project from Linux container on Docker, run this code on root directory folder of docker-compose : 
+
+```
+docker-compose up
+```
+Sql instance will be up from port number : 1433
+
+
+### Install project via Visual Studio IIS Express : 
+If you prefer to run project via Visual Studio without any Docker containers : 
+
+First you should set your Sql connection string in
+Checkout.PaymentGateway.Api project appsettings.json : 
+
+```
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=ms-sql-server, 1433;Initial Catalog=CheckoutPaymentGatewayDB;User ID=SA;Password=SqlPassword2021;"
+  },
+```
+
+
+## API Structure : 
+
+![Untitled Diagram](https://user-images.githubusercontent.com/34062320/115704698-fad4a480-a36b-11eb-9d36-dbbb6b44aecc.png)
+
+
+For improve readbility Swagger UI has been integrated to project. All request could have been done through Swagger UI ( api/index.html )
+
+#### Important Notes : It's not possible to reach any api methods without authorization
+For being authorize ; 
+- First you should make a request to /api/authentication endpoint with your merchantID and apiKey.
+- If your merchantID and apiKey correct,  api will return encyrpted "secret" key.
+- For all other api calls you should put this "Secret" key on "Authorization" header.
+
+Test Users : 
+  ```
+  {
+    "merchantID" = "HB123H7123G712",
+    "apiKey" = "314179fa-7de9-4c9d-8d52-fb6f62ab3815",
+  },
+  {
+    "merchantID": "HB123H7123G712",
+    "apiKey": "14ec3398-45aa-4149-82c7-d9c6fa594bcf"
+  },
+  {
+    "merchantID": "K12312N21M123",
+    "apiKey": "b93b78f9-fb2f-4a00-9c55-95bb4ae2fc6a"
+  },
+  {
+    "merchantID": "1231MN11H2781",
+    "apiKey": "352015a8-7553-40d1-8870-8f382a1256ae"
+  },
+```
 
 
 ## Project Architecture : 
