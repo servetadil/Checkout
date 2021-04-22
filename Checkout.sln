@@ -35,8 +35,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.PaymentProcessor", "Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.Api.IntegrationTests", "Checkout.PaymentGateway.Api.IntegrationTests\Checkout.PaymentGateway.Api.IntegrationTests.csproj", "{6807BE40-EBEE-4C28-A823-670080F202B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{8D9D3BBD-F0A6-4A6A-B54A-7759A6AF6718}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
