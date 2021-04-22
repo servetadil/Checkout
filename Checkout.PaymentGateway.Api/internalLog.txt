@@ -68,3 +68,19 @@
 2021-04-21 21:54:04.3310 Info Adding target FileTarget(Name=alldata)
 2021-04-21 21:54:04.3396 Info Adding target FileTarget(Name=otherFile-web)
 2021-04-21 21:54:04.3683 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-04-22 09:54:45.1845 Info Message Template Auto Format enabled
+2021-04-22 09:54:45.1845 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-22 09:54:45.2250 Info Adding target FileTarget(Name=alldata)
+2021-04-22 09:54:45.2250 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-22 09:54:45.2509 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-22 09:55:06.2202 Info Shutdown() called. Logger closing...
+2021-04-22 09:55:06.2202 Info Closing old configuration.
+2021-04-22 09:55:06.2347 Info Logger has been closed down.
+2021-04-22 11:28:10.6100 Info Message Template Auto Format enabled
+2021-04-22 11:28:10.6221 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-22 11:28:10.6632 Info Adding target FileTarget(Name=alldata)
+2021-04-22 11:28:10.6685 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-22 11:28:10.6929 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-22 11:28:32.6143 Info Shutdown() called. Logger closing...
+2021-04-22 11:28:32.6143 Info Closing old configuration.
+2021-04-22 11:28:32.6300 Info Logger has been closed down.

@@ -10,10 +10,7 @@ services:
       dockerfile: Checkout.PaymentGateway.Api/Dockerfile
     ports:
       - 5001
-  ms-sql-server:
-    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
-    environment: 
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: 'SqlPassword2021'
-    ports:
-      - "1433:1433"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw

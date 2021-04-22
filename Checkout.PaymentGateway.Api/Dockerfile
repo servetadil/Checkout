@@ -1,18 +1,17 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5001
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+ENV ASPNETCORE_URLS=http://+:5001
+
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+# For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["Checkout.PaymentGateway.Api/Checkout.PaymentGateway.Api.csproj", "Checkout.PaymentGateway.Api/"]
-COPY ["PaymentGateway.Service/Checkout.PaymentGateway.Application.csproj", "PaymentGateway.Service/"]
-COPY ["PaymentGateway.Domain/Checkout.PaymentGateway.Domain.csproj", "PaymentGateway.Domain/"]
-COPY ["PaymentGateway.Helper/Checkout.PaymentGateway.Helper.csproj", "PaymentGateway.Helper/"]
-COPY ["Bank.PaymentProcessor/Bank.PaymentProcessor.csproj", "Bank.PaymentProcessor/"]
-COPY ["PaymentGateway.Infrastructure/Checkout.PaymentGateway.Infrastructure.csproj", "PaymentGateway.Infrastructure/"]
 RUN dotnet restore "Checkout.PaymentGateway.Api/Checkout.PaymentGateway.Api.csproj"
 COPY . .
 WORKDIR "/src/Checkout.PaymentGateway.Api"
