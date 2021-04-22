@@ -28,6 +28,7 @@ If you prefer to run project from Linux container on Docker, run this code on th
 docker-compose up
 ```
 Sql instance will be up from port number : 1433
+Api port number : 5001  localhost:5001/api
 
 
 ### Install project via Visual Studio IIS Express : 
