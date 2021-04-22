@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Checkout.PaymentGateway.Api/Dockerfile
     ports:
-      - 5001
+      - "5001:5001"
   ms-sql-server:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     environment: 
