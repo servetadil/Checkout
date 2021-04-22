@@ -1,5 +1,5 @@
 # Domain
 
-This layer is Domain Layer of my project.
-This Layer only contains Core objects such as :  Entities and Common SharedKernel objects.
-This Layer is used for communication reason beyween Application and Infrastructure.
+This layer is the Domain Layer of the project.
+This Layer only contains Core objects, such as :  Entities and Common SharedKernel objects.
+This Layer is used for communication reasons between Application and Infrastructure.

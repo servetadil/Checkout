@@ -33,7 +33,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BankMockup", "BankMockup", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.PaymentProcessor", "Bank.PaymentProcessor\Bank.PaymentProcessor.csproj", "{1D23B3A7-8A9F-47DB-9E53-9F7FA2CC1755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.PaymentGateway.Api.IntegrationTests", "Checkout.PaymentGateway.Api.IntegrationTests\Checkout.PaymentGateway.Api.IntegrationTests.csproj", "{6807BE40-EBEE-4C28-A823-670080F202B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.Api.IntegrationTests", "Checkout.PaymentGateway.Api.IntegrationTests\Checkout.PaymentGateway.Api.IntegrationTests.csproj", "{6807BE40-EBEE-4C28-A823-670080F202B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{8D9D3BBD-F0A6-4A6A-B54A-7759A6AF6718}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

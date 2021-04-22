@@ -1,0 +1,14 @@
+version: '3'
+services:
+	ms-sql-server:
+		image:mcr.microsoft/mssql/server:2017-latest-ubuntu
+		environment:
+			ACCEPT_EULA:"Y"
+			SA_PASSWORD: "Password2021"
+			MSSQL_PID: Express
+		ports:
+			-"1433:1433"
+	checkoutgateway-api:
+		build : .
+		ports:
+		 - "8080:80"

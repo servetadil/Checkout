@@ -2,7 +2,6 @@
 using Checkout.PaymentGateway.Helper.Common;
 using Checkout.PaymentGateway.Helper.Encryption;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;

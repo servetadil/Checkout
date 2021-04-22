@@ -1,0 +1,70 @@
+2021-04-21 22:26:31.3157 Info Message Template Auto Format enabled
+2021-04-21 22:26:31.3506 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 22:26:31.4470 Info Adding target FileTarget(Name=alldata)
+2021-04-21 22:26:31.4659 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 22:26:31.5132 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-21 22:28:37.4854 Info Message Template Auto Format enabled
+2021-04-21 22:28:37.5022 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 22:28:37.5620 Info Adding target FileTarget(Name=alldata)
+2021-04-21 22:28:37.5713 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 22:28:37.6073 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-21 20:58:29.5404 Info Message Template Auto Format enabled
+2021-04-21 20:58:29.5572 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 20:58:29.6079 Info Adding target FileTarget(Name=alldata)
+2021-04-21 20:58:29.6150 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 20:58:29.6426 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-04-21 20:59:19.1152 Info Message Template Auto Format enabled
+2021-04-21 20:59:19.1307 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 20:59:19.1874 Info Adding target FileTarget(Name=alldata)
+2021-04-21 20:59:19.1953 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 20:59:19.2252 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-04-21 23:25:03.6593 Info Message Template Auto Format enabled
+2021-04-21 23:25:03.6666 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 23:25:03.7043 Info Adding target FileTarget(Name=alldata)
+2021-04-21 23:25:03.7043 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 23:25:03.7268 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-21 23:25:07.6450 Info Shutdown() called. Logger closing...
+2021-04-21 23:25:07.6458 Info Closing old configuration.
+2021-04-21 23:25:07.6605 Info Logger has been closed down.
+2021-04-21 21:26:31.1373 Info Message Template Auto Format enabled
+2021-04-21 21:26:31.1535 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 21:26:31.2075 Info Adding target FileTarget(Name=alldata)
+2021-04-21 21:26:31.2164 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 21:26:31.2448 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-04-21 21:30:44.4676 Info Message Template Auto Format enabled
+2021-04-21 21:30:44.4834 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 21:30:44.5350 Info Adding target FileTarget(Name=alldata)
+2021-04-21 21:30:44.5350 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 21:30:44.5703 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-04-21 21:33:46.0244 Info Message Template Auto Format enabled
+2021-04-21 21:33:46.0403 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 21:33:46.0965 Info Adding target FileTarget(Name=alldata)
+2021-04-21 21:33:46.1055 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 21:33:46.1357 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-04-21 23:42:42.3230 Info Message Template Auto Format enabled
+2021-04-21 23:42:42.3230 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 23:42:42.3652 Info Adding target FileTarget(Name=alldata)
+2021-04-21 23:42:42.3652 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 23:42:42.3885 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-21 23:44:47.8009 Info Shutdown() called. Logger closing...
+2021-04-21 23:44:47.8015 Info Closing old configuration.
+2021-04-21 23:44:47.8015 Info Logger has been closed down.
+2021-04-21 23:44:47.8015 Info AppDomain Shutting down. Logger closing...
+2021-04-21 23:44:47.8180 Info Logger has been shut down.
+2021-04-21 23:45:10.8579 Info Message Template Auto Format enabled
+2021-04-21 23:45:10.8656 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 23:45:10.9033 Info Adding target FileTarget(Name=alldata)
+2021-04-21 23:45:10.9033 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 23:45:10.9256 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Users\ServetPC\source\repos\Checkout\Checkout.PaymentGateway.Api\bin\Debug\netcoreapp3.1\nlog.config
+2021-04-21 23:47:12.3163 Info AppDomain Shutting down. Logger closing...
+2021-04-21 23:47:12.3392 Info Logger has been shut down.
+2021-04-21 21:51:35.4193 Info Message Template Auto Format enabled
+2021-04-21 21:51:35.4345 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 21:51:35.4897 Info Adding target FileTarget(Name=alldata)
+2021-04-21 21:51:35.4993 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 21:51:35.5290 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-04-21 21:54:04.2633 Info Message Template Auto Format enabled
+2021-04-21 21:54:04.2784 Info Loading assembly: NLog.Web.AspNetCore
+2021-04-21 21:54:04.3310 Info Adding target FileTarget(Name=alldata)
+2021-04-21 21:54:04.3396 Info Adding target FileTarget(Name=otherFile-web)
+2021-04-21 21:54:04.3683 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
